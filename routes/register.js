@@ -3,7 +3,8 @@ const router = express.Router();
 const User = require('../model/user');
 // to hash password 
 const bcrypt = require("bcrypt");
-
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 router.route('/register' , async(req,res)=>{
    //first always take what is incoming in the request
    const {username , email , password} = req.body;

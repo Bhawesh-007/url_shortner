@@ -8,6 +8,8 @@ const router = express.Router();
 const user = require("../model/user")
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 router.route('/login' , async(req,res)=>{
     const {username , password} = req.body;
     if(!username ||!password)return res.status(401).json({message : "Error in credentials"});
