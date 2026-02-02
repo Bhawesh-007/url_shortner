@@ -9,9 +9,22 @@ const URL = require('../model/url');
 const authMiddleware = require("../utils/jwtmiddleware");
 
 
+
 router.get('/dashboard' , authMiddleware , async(req,res)=>{
+    console.log(req.user);
     const Id = req.user.id;
-    const urls = await URL.findOne({owner : Id});
+    if(!Id)return res.status(401).json({
+        message : "error with authentication !!"
+    })
+    try{
+    const urls = await URL.find({owner : Id});
     res.send(urls);
+    }
+    catch(err){
+        res.status(401).json({
+            message : "cant fetch the url",
+            msg: err.message,
+        })
+    }
 })
 module.exports = router;

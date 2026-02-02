@@ -5,6 +5,7 @@ const connectDB = require("./connect/mongo.js")
 const router_register = require('./routes/register.js');
 const router_login = require('./routes/login.js');
 const router_dashboard = require('./routes/dashboard.js');
+const geturl = require("./routes/geturl.js")
 const app = express();
 const PORT  = 8080;
 app.use(express.urlencoded({extended:true}));
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use('/api/auth' , router_register);
 app.use('/api/auth' , router_login);
 app.use('/api/user', router_dashboard);
+app.use('/api/user/dashboard' , geturl);
 app.get('/',(req,res)=>{
     res.send("WELCOME !!!");
 })

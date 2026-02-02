@@ -34,7 +34,8 @@ router.post('/login' , async(req,res)=>{
         {expiresIn : "1h"}
     )
     res.status(200).json({
-        message : "user is logged in !!"
+        message : "user is logged in !!",
+        key : token,
     })
 }
 catch(err){

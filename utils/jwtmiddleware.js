@@ -13,7 +13,7 @@ const authMiddleware = (req,res,next)=>{
     try{
         const token = authHeader.split(" ")[1];
         const decoded  = jwt.verify(token,process.env.JWT_SECRET);
-        req.body = decoded; //here i am assigning body to the req.body
+        req.user = decoded; //here i am assigning body to the req.body
         next();
 
     }

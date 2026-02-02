@@ -6,7 +6,7 @@
 //4. so what can i do is that whenver use will click at generate button then a post request will be made and its body will contain that url
 
 const {nanoid} = require('nanoid');
-const URL = require('../model/url');
+const URL = require('../model/url.js');
 
 const urlShortner = async(req,res)=>{
      const {url} = req.body;
@@ -17,12 +17,13 @@ const urlShortner = async(req,res)=>{
      }
      try{
         const shortId = nanoid(8);
-        const entry =  await new URL.create({
+        const entry =  new URL({
             owner : req.user.id,
             shortID : shortId,
             redirectID : url,
             visited : [],
         });
+        await entry.save()
         return res.status(201).json({
       status: "success",
       data: entry,
@@ -36,4 +37,4 @@ const urlShortner = async(req,res)=>{
      }
 
 }
-module.exports = {urlShortner};
+module.exports = urlShortner;
