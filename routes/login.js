@@ -5,12 +5,14 @@
 //3. all further requrest will require that token
 const express = require("express");
 const router = express.Router();
-const user = require("../model/user")
+const User = require("../model/user")
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const app = express();
 const secret = process.env.JWT_SECRET;
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-router.route('/login' , async(req,res)=>{
+router.post('/login' , async(req,res)=>{
     const {username , password} = req.body;
     if(!username ||!password)return res.status(401).json({message : "Error in credentials"});
      try{

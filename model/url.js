@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
+const User = require('./user.js');
 //now i will make schema for urls 
-const express = require("express");
+
 const urlSchema = new mongoose.Schema({
+    owner:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref : User,
+      requried : true,
+    },
     shortID:{
         type: String,
         required: true,
